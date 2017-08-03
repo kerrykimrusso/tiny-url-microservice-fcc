@@ -20,7 +20,12 @@ class TinyUrl {
     return shortenedUrl;
   }
   
-  static convertBase(num) {
+  static convertIntToBase(int, length, map) {
+    let converted = '';
+    
+    while(int > 0) {
+      int / length  
+    }
     
     return converted;
   }
