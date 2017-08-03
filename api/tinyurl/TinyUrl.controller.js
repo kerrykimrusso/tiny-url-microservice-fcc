@@ -6,11 +6,21 @@ class TinyUrl {
     
   }
 
-  static read(req, res, next) {
+  static getBySlug(req, res, next) {
     let slug = req.params.slug;
     model.findOne({ slug: slug })
       .then()
       .catch(next);
+  }
+  
+  static shortenUrl(url) {
+    let shortenedUrl = '';
+    
+    return shortenedUrl;
+  }
+  
+  static convertBase() {
+    
   }
 }
 
