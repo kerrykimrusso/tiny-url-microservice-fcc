@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const model = require('./TinyUrl.model');
+const baseConversionMap = require('../../constants').baseConversionMap;
 
 class TinyUrl {
   static create(req, res, next) {
@@ -19,8 +20,9 @@ class TinyUrl {
     return shortenedUrl;
   }
   
-  static convertBase() {
+  static convertBase(num) {
     
+    return converted;
   }
 }
 
