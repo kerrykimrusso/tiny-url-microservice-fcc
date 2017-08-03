@@ -20,14 +20,20 @@ class TinyUrl {
     return shortenedUrl;
   }
   
-  static convertIntToBase(int, length, map) {
-    let converted = '';
+  static convertIntToBase(int, conversionLength, map) {
+    let conversion = '';
     
-    while(int > 0) {
-      int / length  
+    let placeValue = Math.pow(map.length, conversionLength);
+    let quotient = 0, remainder = int;
+    while(remainder > 0) {
+      if(conversion.length) {
+        quotient = Math.floor(remainder / placeValue);
+        conversion += remainder >= placeValue ? quotient : map[0];
+        remainder = remainder - quotient * placeValue;
+      }
     }
     
-    return converted;
+    return conversion;
   }
 }
 
