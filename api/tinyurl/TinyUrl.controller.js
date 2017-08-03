@@ -23,14 +23,15 @@ class TinyUrl {
   static convertIntToBase(int, conversionLength, map) {
     let conversion = '';
     
+    console.log('running function...');
+    
     let placeValue = Math.pow(map.length, conversionLength);
     let quotient = 0, remainder = int;
     while(remainder > 0) {
-      if(conversion.length) {
-        quotient = Math.floor(remainder / placeValue);
-        conversion += remainder >= placeValue ? quotient : map[0];
-        remainder = remainder - quotient * placeValue;
-      }
+      quotient = Math.floor(remainder / placeValue);
+      conversion += remainder >= placeValue ? quotient : map[0];
+      remainder = remainder - quotient * placeValue;
+      placeValue -= 1;
     }
     
     return conversion;
