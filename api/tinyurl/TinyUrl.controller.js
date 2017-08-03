@@ -21,17 +21,21 @@ class TinyUrl {
   }
   
   static convertIntToBase(int, conversionLength, map) {
-    let conversion = '';
+    if(int < 0) throw new Error('number to convert cannot be negative');
     
-    console.log('running function...');
-    
-    let placeValue = Math.pow(map.length, conversionLength);
-    let quotient = 0, remainder = int;
+    let conversion = '', placeValue = 0, quotient = 0, remainder = int;
     while(remainder > 0) {
-      quotient = Math.floor(remainder / placeValue);
-      conversion += remainder >= placeValue ? quotient : map[0];
-      remainder = remainder - quotient * placeValue;
-      placeValue -= 1;
+      placeValue = Math.pow(map.length, conversionLength);
+      if(placeValue > remainder) {
+        conversionLength -= 1;
+        conversion += conversion.lenth ? map[0] : '';
+        continue;
+      } else {
+        quotient = Math.floor(remainder / placeValue);
+        conversion += map[quotient];
+        remainder -= quotient * placeValue;
+        conversionLength -= 1;
+      }
     }
     
     return conversion;

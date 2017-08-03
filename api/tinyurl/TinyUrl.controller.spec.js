@@ -4,7 +4,7 @@ const it = mocha.it;
 const chai = require('chai');
 const expect = chai.expect;
 const TinyUrlController = require('./TinyUrl.controller');
-const map = require('../../constants');
+const map = require('../../constants').baseConversionMap;
 
 describe('TinyUrl Controller', function() {
   describe('#convertIntToBase(int, conversionLength, map)', function() {
@@ -16,6 +16,12 @@ describe('TinyUrl Controller', function() {
     it('should correctly convert an integer into a new base using the characters and length provided by the map', function() {
       let result = TinyUrlController.convertIntToBase(1, 7, map);
       expect(result).to.equal('1');
+      
+      result = TinyUrlController.convertIntToBase(125, 7, map);
+      expect(result).to.equal('21');
+      
+      result = TinyUrlController.convertIntToBase(7912, 7, map);
+      expect(result).to.equal('23C');
     });
     
     it('should throw an error if int is less than 0', function() {
