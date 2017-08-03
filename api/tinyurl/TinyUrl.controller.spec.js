@@ -23,7 +23,7 @@ describe('TinyUrl Controller', function() {
       result = TinyUrlController.convertIntToBase(7912, 7, map);
       expect(result).to.equal('000023C');
       
-      result = TinyUrlController.convertIntToBase(0);
+      result = TinyUrlController.convertIntToBase(0, 7, map);
       expect(result).to.equal('0000000');
     });
     

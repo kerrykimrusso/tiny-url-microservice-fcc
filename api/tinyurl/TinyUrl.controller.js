@@ -23,11 +23,11 @@ class TinyUrlController {
   static convertIntToBase(int, conversionLength, map) {
     if(int < 0) throw new Error('number to convert cannot be negative');
     
-    if(int == 0) return '00';
+    if(int === 0) return '0'.repeat(conversionLength); //Array(conversionLength + 1).join('0');
     
     let conversion = '', placeValue = 0, quotient = 0, remainder = int;
     while(remainder > 0) {
-      placeValue = Math.pow(map.length, conversionLength);
+      placeValue = Math.pow(map.length, conversionLength - 1);
       quotient = Math.floor(remainder / placeValue);
       conversion += map[quotient];
       remainder -= quotient * placeValue;
