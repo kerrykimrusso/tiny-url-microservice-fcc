@@ -15,16 +15,16 @@ describe('TinyUrl Controller', function() {
     
     it('should correctly convert an integer into a new base using the characters and length provided by the map', function() {
       let result = TinyUrlController.convertIntToBase(1, 7, map);
-      expect(result).to.equal('1');
+      expect(result).to.equal('0000001');
       
       result = TinyUrlController.convertIntToBase(125, 7, map);
-      expect(result).to.equal('21');
+      expect(result).to.equal('0000021');
       
       result = TinyUrlController.convertIntToBase(7912, 7, map);
-      expect(result).to.equal('23C');
+      expect(result).to.equal('000023C');
       
       result = TinyUrlController.convertIntToBase(0);
-      expect(result).to.equal('0');
+      expect(result).to.equal('0000000');
     });
     
     it('should throw an error if int is less than 0', function() {
@@ -32,8 +32,8 @@ describe('TinyUrl Controller', function() {
     });
     
     it('should throw an error if int is larger than the largest possible integer for conversionLength', function() {
-      let largestNumberConversionCanHandle = Math.pow(map.length, 7);
-      expect()
+      let tooLargeOfANumber = Math.pow(map.length, 7) + 1;
+      expect(TinyUrlController.convertIntToBase(tooLargeOfANumber, 7, map)).to.throw(Error);
     });
   });
 });
