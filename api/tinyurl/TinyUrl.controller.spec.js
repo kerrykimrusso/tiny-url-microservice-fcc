@@ -22,11 +22,18 @@ describe('TinyUrl Controller', function() {
       
       result = TinyUrlController.convertIntToBase(7912, 7, map);
       expect(result).to.equal('23C');
+      
+      result = TinyUrlController.convertIntToBase(0);
+      expect(result).to.equal('0');
     });
     
     it('should throw an error if int is less than 0', function() {
-      expect(TinyUrlController.convertIntToBase(-1)).to.throw();
-      expect(TinyUrlController.convertIntToBase(0)).to.equal('0');
+      expect(TinyUrlController.convertIntToBase(-1)).to.throw(Error);
+    });
+    
+    it('should throw an error if int is larger than the largest possible integer for conversionLength', function() {
+      let largestNumberConversionCanHandle = Math.pow(map.length, 7);
+      expect()
     });
   });
 });
