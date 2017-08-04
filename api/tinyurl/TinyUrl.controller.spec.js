@@ -23,23 +23,23 @@ describe('TinyUrl Controller', function() {
       let result = tinyUrlController._convertIntToBase(1, 7, map);
       expect(result).to.equal('0000001');
       
-      result = tinyUrlController.)convertIntToBase(125, 7, map);
+      result = tinyUrlController._convertIntToBase(125, 7, map);
       expect(result).to.equal('0000021');
       
-      result = tinyUrlController.convertIntToBase(7912, 7, map);
+      result = tinyUrlController._convertIntToBase(7912, 7, map);
       expect(result).to.equal('000023C');
       
-      result = tinyUrlController.convertIntToBase(0, 7, map);
+      result = tinyUrlController._convertIntToBase(0, 7, map);
       expect(result).to.equal('0000000');
     });
     
     it('should throw an error if int is less than 0', function() {
-      expect(tinyUrlController.convertIntToBase.bind(-1, 7, map)).to.throw(Error);
+      expect(tinyUrlController._convertIntToBase.bind(-1, 7, map)).to.throw(Error);
     });
     
     it('should throw an error if int is larger than the largest possible integer for conversionLength', function() {
       let tooLargeOfANumber = Math.pow(map.length, 7) + 1;
-      expect(tinyUrlController.convertIntToBase.bind(tooLargeOfANumber, 7, map)).to.throw(Error);
+      expect(tinyUrlController._convertIntToBase.bind(tooLargeOfANumber, 7, map)).to.throw(Error);
     });
   });
 });

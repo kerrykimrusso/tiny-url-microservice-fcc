@@ -8,7 +8,7 @@ class TinyUrlController {
     try {
       let tinyUrl = this._shortenUrl(req.params.url);
       model.create(tinyUrl)
-        .then()
+        .then(this._respondWithDocumentAsJson.bind(res))
         .catch(next);
     } catch(err) {
       res.json({ success: false, error: err.message }).end();
@@ -55,7 +55,9 @@ class TinyUrlController {
     return conversion;
   }
   
-  
+  _respondWithDocumentAsJson(res, doc) {
+    res.json(doc).end();
+  }
 }
 
 module.exports = TinyUrlController;
