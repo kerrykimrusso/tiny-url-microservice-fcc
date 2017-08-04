@@ -4,9 +4,13 @@ const urlValidator = require('valid-url');
 const baseConversionMap = require('../../constants').baseConversionMap;
 
 class TinyUrlController {
+  constructor(curId = 0) {
+    this.curId = curId;
+  }
+  
   create(req, res, next) {
     try {
-      let tinyUrl = this._shortenUrl(req.params.url);
+      let tinyUrl = this._shortenUrl(req.params.url, );
       model.create(tinyUrl)
         .then(this._respondWithDocumentAsJson.bind(res))
         .catch(next);
