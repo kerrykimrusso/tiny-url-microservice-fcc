@@ -28,12 +28,12 @@ describe('TinyUrl Controller', function() {
     });
     
     it('should throw an error if int is less than 0', function() {
-      expect(TinyUrlController.convertIntToBase(-1)).to.throw(Error);
+      expect(TinyUrlController.convertIntToBase.bind(-1, 7, map)).to.throw(Error);
     });
     
     it('should throw an error if int is larger than the largest possible integer for conversionLength', function() {
       let tooLargeOfANumber = Math.pow(map.length, 7) + 1;
-      expect(TinyUrlController.convertIntToBase(tooLargeOfANumber, 7, map)).to.throw(Error);
+      expect(TinyUrlController.convertIntToBase.bind(tooLargeOfANumber, 7, map)).to.throw(Error);
     });
   });
 });
