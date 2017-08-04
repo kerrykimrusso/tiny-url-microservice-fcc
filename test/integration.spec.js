@@ -18,7 +18,8 @@ before(function(done) {
         done();
     })
     .on('error', function(err) {
-        console.log(err);
+      console.log(err);
+      done();
     });
 });
 
