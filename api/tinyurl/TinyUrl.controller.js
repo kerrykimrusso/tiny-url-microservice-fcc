@@ -40,6 +40,13 @@ class TinyUrlController {
   _convertIntToBase(int, conversionLength, map) {
     if(int < 0) throw new Error('number to convert cannot be negative');
     
+    let maxInt = 0;
+    for(let i = conversionLength - 1; i >= 0; --i) {
+      maxInt += Math.pow(map.length, i);
+    }
+    
+    if(int > maxInt) throw new Error('int is too large, must be smaller than ' + maxInt);
+    
     if(int === 0) return Array(conversionLength + 1).join('0');
     
     let conversion = '', placeValue = 0, quotient = 0, remainder = int;
