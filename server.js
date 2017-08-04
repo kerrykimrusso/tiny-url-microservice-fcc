@@ -5,7 +5,7 @@
 var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
-var TinyUrlRoutes = require('routes/api/tinyurl.routes');
+var TinyUrlRoutes = require('./routes/api/TinyUrl.routes'); 
 
 // db setup
 mongoose.set('debug', true);

@@ -12,7 +12,7 @@ class TinyUrlController {
     try {
       let tinyUrl = this._shortenUrl(req.params.url, this.curId);
       model.create(tinyUrl)
-        .then(this._respondWithDocumentAsJson.bind(res))
+        .then(this._respondWithDocumentAsJson.bind(null, res))
         .catch(next);
     } catch(err) {
       res.json({ success: false, error: err.message }).end();
@@ -22,7 +22,7 @@ class TinyUrlController {
   getBySlug(req, res, next) {
     let slug = req.params.slug;
     model.findOne({ slug: slug })
-      .then()
+      .then(this._redirect.bind(null, res))
       .catch(next);
   }
   
@@ -66,7 +66,12 @@ class TinyUrlController {
   }
   
   _respondWithDocumentAsJson(res, doc) {
+    ++this.curId;
     res.json(doc).end();
+  }
+  
+  _redirect(res, doc) {
+    res.redirect(doc.destination);
   }
 }
 
