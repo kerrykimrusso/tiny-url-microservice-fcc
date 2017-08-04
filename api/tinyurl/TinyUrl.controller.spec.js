@@ -39,28 +39,28 @@ describe('TinyUrl Controller', function() {
     
     it('should throw an error if int is larger than the largest possible integer for conversionLength', function() {
       let tooLargeOfANumber = Math.pow(map.length, 7) + 1;
-      expect(tinyUrlController._convertIntToBase.bind(tooLargeOfANumber, 7, map)).to.throw(Error);
+      expect(tinyUrlController._convertIntToBase.bind(null, tooLargeOfANumber, 7, map)).to.throw(Error);
     });
   });
   
   describe('#shortenUrl(url, id)', function() {
     it('should throw an error if the url is falsey', function() {
-      expect(tinyUrlController._shortenUrl.bind('', 1)).to.throw(Error);
-      expect(tinyUrlController._shortenUrl.bind(null, 1)).to.throw(Error);
-      expect(tinyUrlController._shortenUrl.bind(undefined, 1)).to.throw(Error);
-      expect(tinyUrlController._shortenUrl.bind(false, 1)).to.throw(Error);
-      expect(tinyUrlController._shortenUrl.bind(0, 1)).to.throw(Error);
+      expect(tinyUrlController._shortenUrl.bind(null, '', 1)).to.throw(Error);
+      expect(tinyUrlController._shortenUrl.bind(null, null, 1)).to.throw(Error);
+      expect(tinyUrlController._shortenUrl.bind(null, undefined, 1)).to.throw(Error);
+      expect(tinyUrlController._shortenUrl.bind(null, false, 1)).to.throw(Error);
+      expect(tinyUrlController._shortenUrl.bind(null, 0, 1)).to.throw(Error);
     });
     
     it('should throw an error if the url is not a valid uri', function() {
-      expect(tinyUrlController._shortenUrl.bind('this is not a url', 1)).to.throw(Error);
-      expect(tinyUrlController._shortenUrl.bind('www.google.com', 1)).to.throw(Error);
-      expect(tinyUrlController._shortenUrl.bind('google.com', 1)).to.throw(Error);
+      expect(tinyUrlController._shortenUrl.bind(null, 'this is not a url', 1)).to.throw(Error);
+      expect(tinyUrlController._shortenUrl.bind(null, 'www.google.com', 1)).to.throw(Error);
+      expect(tinyUrlController._shortenUrl.bind(null, 'google.com', 1)).to.throw(Error);
     });
     
     it('should throw an error if the id cannot be parsed to an integer', function() {
-      expect(tinyUrlController._shortenUrl.bind('http://google.com', 'integer')).to.throw(Error);
-      expect(tinyUrlController._shortenUrl.bind('http://google.com', '9484')).to.not.throw();
+      expect(tinyUrlController._shortenUrl.bind(null, 'http://google.com', 'integer')).to.throw(Error);
+      expect(tinyUrlController._shortenUrl.bind(null, 'http://google.com', '9484')).to.not.throw();
     });
   });
 });

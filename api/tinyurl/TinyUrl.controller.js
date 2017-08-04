@@ -27,7 +27,7 @@ class TinyUrlController {
     if(!this._isValidUrl(url)) throw new Error('url not properly formatted');
     if(isNaN(parseInt(id))) throw new Error('id must be able to be parsed to an int');
     
-    return { slug:  this._convertIntToBase(id), destination: url };
+    return { slug: this._convertIntToBase(id), destination: url };
   }
   
   _isValidUrl(url) {
