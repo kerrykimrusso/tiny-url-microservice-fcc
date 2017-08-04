@@ -26,6 +26,12 @@ class TinyUrlController {
       .catch(next);
   }
   
+  _getLatestSlug() {
+    model.findOne()
+      .then(doc => { return doc })
+      .catch((err) => { throw new Error(err); });
+  }
+  
   _shortenUrl(url, id) {
     if(!url) throw new Error('url cannot be falsey');
     if(!this._isValidUrl(url)) throw new Error('url not properly formatted');
