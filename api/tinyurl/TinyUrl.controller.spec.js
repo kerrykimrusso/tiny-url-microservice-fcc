@@ -54,11 +54,13 @@ describe('TinyUrl Controller', function() {
     
     it('should throw an error if the url is not a valid uri', function() {
       expect(tinyUrlController._shortenUrl.bind('this is not a url', 1)).to.throw(Error);
-      expect(tinyUrlController._shortenUrl.bind('this is not a url', 1)).to.throw(Error);
+      expect(tinyUrlController._shortenUrl.bind('www.google.com', 1)).to.throw(Error);
+      expect(tinyUrlController._shortenUrl.bind('google.com', 1)).to.throw(Error);
     });
     
     it('should throw an error if the id cannot be parsed to an integer', function() {
-      
+      expect(tinyUrlController._shortenUrl.bind('http://google.com', 'integer')).to.throw(Error);
+      expect(tinyUrlController._shortenUrl.bind('http://google.com', '9484')).to.not.throw();
     });
   });
 });
