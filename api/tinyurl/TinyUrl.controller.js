@@ -26,10 +26,10 @@ class TinyUrlController {
       .catch(next);
   }
   
-  _getLatestSlug() {
-    model.findOne()
-      .then(doc => { return doc })
-      .catch((err) => { throw new Error(err); });
+  _getLatestSlug(error, success) {
+    model.find({}).sort('-created').limit(1).exec()
+      .then(success)
+      .catch(error);
   }
   
   _shortenUrl(url, id) {
