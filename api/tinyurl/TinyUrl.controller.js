@@ -14,10 +14,14 @@ class TinyUrlController {
       .catch(next);
   }
   
-  static shortenUrl(url) {
-    let shortenedUrl = '';
+  static shortenUrl(destination) {
+    if(!destination) throw new Error('url cannot be null or empty');
     
-    return shortenedUrl;
+    if(!isUrl(destination)) throw new Error('destination is not in url format');
+    
+    let slug = TinyUrlController.convertIntToBase();
+    
+    return { slug, destination };
   }
   
   static convertIntToBase(int, conversionLength, map) {
