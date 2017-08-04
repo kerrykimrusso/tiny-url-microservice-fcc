@@ -5,8 +5,12 @@ const baseConversionMap = require('../../constants').baseConversionMap;
 
 class TinyUrlController {
   static create(req, res, next) {
-    let url = req.params.url;
-    
+    let tinyUrl = TinyUrlController.shortenUrl(req.params.url);
+    if(tinyUrl) {
+      model.create(tinyUrl)
+        .then()
+        .catch(next);
+    }
   }
 
   static getBySlug(req, res, next) {
@@ -16,13 +20,13 @@ class TinyUrlController {
       .catch(next);
   }
   
-  static shortenUrl(destination) {
-    if(!destination) throw new Error('url cannot be null or empty');
-    if(!TinyUrlController.isValidUrl(destination)) throw new Error('destination is not in url format');
+  static shortenUrl(url) {
+    if(!url) return null;
+    if(!TinyUrlController.isValidUrl(url)) return null;
     
     let slug = TinyUrlController.convertIntToBase();
     
-    return { slug, destination };
+    return { slug: slug, destination: url };
   }
   
   static isValidUrl(url) {
@@ -48,6 +52,8 @@ class TinyUrlController {
     
     return conversion;
   }
+  
+  
 }
 
 module.exports = TinyUrlController;
