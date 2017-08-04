@@ -1,3 +1,4 @@
+const server = require('../server');
 const mongoose = require('mongoose');
 mongoose.promise = global.Promise; 
 const mocha = require('mocha');
@@ -28,4 +29,13 @@ describe('/new/http://google.com', function() {
     });
   });
   
+  it('should create a document from a valid long url', function(done) {
+    chai.request(server)
+      .get('/new/http://google.com')
+      .end((err, res) => {
+        if(err) console.log(err);
+        else console.log(res.body);
+        done();
+      })
+  });
 });
