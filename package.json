@@ -15,7 +15,8 @@
     "mongodb": "^2.2.30",
     "mongoose": "^4.11.5",
     "mocha": "^3.5.0",
-    "chai": "^4.1.0"
+    "chai": "^4.1.0",
+    "valid-url": "^1.0.9"
   },
   "engines": {
     "node": "8.x"

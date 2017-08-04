@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 const model = require('./TinyUrl.model');
+const urlValidator = require('valid-url');
 const baseConversionMap = require('../../constants').baseConversionMap;
 
 class TinyUrlController {
   static create(req, res, next) {
+    let url = req.params.url;
     
   }
 
@@ -16,12 +18,18 @@ class TinyUrlController {
   
   static shortenUrl(destination) {
     if(!destination) throw new Error('url cannot be null or empty');
-    
-    if(!isUrl(destination)) throw new Error('destination is not in url format');
+    if(!TinyUrlController.isValidUrl(destination)) throw new Error('destination is not in url format');
     
     let slug = TinyUrlController.convertIntToBase();
     
     return { slug, destination };
+  }
+  
+  static isValidUrl(url) {
+    // TODO best would be to actually see if a 200 response is returned from the url
+    // but easiest is just going to verify that the url is properly formatted
+    
+    return urlValidator.isUri(url);
   }
   
   static convertIntToBase(int, conversionLength, map) {
