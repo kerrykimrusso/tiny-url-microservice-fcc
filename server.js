@@ -5,6 +5,7 @@
 var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
+var TinyUrlRoutes = require('routes/api/tinyurl.routes');
 
 // db setup
 mongoose.set('debug', true);
@@ -21,6 +22,8 @@ app.use(express.static('public'));
 app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
+
+app.use('/', TinyUrlRoutes);
 
 
 // listen for requests :)

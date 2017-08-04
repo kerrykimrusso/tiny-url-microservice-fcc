@@ -10,7 +10,7 @@ class TinyUrlController {
   
   create(req, res, next) {
     try {
-      let tinyUrl = this._shortenUrl(req.params.url, );
+      let tinyUrl = this._shortenUrl(req.params.url, this.curId);
       model.create(tinyUrl)
         .then(this._respondWithDocumentAsJson.bind(res))
         .catch(next);
