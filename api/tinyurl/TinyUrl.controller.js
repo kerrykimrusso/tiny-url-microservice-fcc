@@ -22,11 +22,12 @@ class TinyUrlController {
       .catch(next);
   }
   
-  _shortenUrl(url) {
-    if(!url) throw new Error('url cannot be empty or null');
+  _shortenUrl(url, id) {
+    if(!url) throw new Error('url cannot be falsey');
     if(!this._isValidUrl(url)) throw new Error('url not properly formatted');
+    if(isNaN(parseInt(id))) throw new Error('id must be able to be parsed to an int');
     
-    let slug = this._convertIntToBase();
+    let slug = this._convertIntToBase(id);
     
     return { slug: slug, destination: url };
   }

@@ -42,4 +42,23 @@ describe('TinyUrl Controller', function() {
       expect(tinyUrlController._convertIntToBase.bind(tooLargeOfANumber, 7, map)).to.throw(Error);
     });
   });
+  
+  describe('#shortenUrl(url, id)', function() {
+    it('should throw an error if the url is falsey', function() {
+      expect(tinyUrlController._shortenUrl.bind('', 1)).to.throw(Error);
+      expect(tinyUrlController._shortenUrl.bind(null, 1)).to.throw(Error);
+      expect(tinyUrlController._shortenUrl.bind(undefined, 1)).to.throw(Error);
+      expect(tinyUrlController._shortenUrl.bind(false, 1)).to.throw(Error);
+      expect(tinyUrlController._shortenUrl.bind(0, 1)).to.throw(Error);
+    });
+    
+    it('should throw an error if the url is not a valid uri', function() {
+      expect(tinyUrlController._shortenUrl.bind('this is not a url', 1)).to.throw(Error);
+      expect(tinyUrlController._shortenUrl.bind('this is not a url', 1)).to.throw(Error);
+    });
+    
+    it('should throw an error if the id cannot be parsed to an integer', function() {
+      
+    });
+  });
 });
