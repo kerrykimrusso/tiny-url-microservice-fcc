@@ -43,7 +43,7 @@ class TinyUrlController {
     if(int === 0) return Array(conversionLength + 1).join('0');
     
     let conversion = '', placeValue = 0, quotient = 0, remainder = int;
-    while(remainder > 0) {
+    while(conversionLength > 0) {
       placeValue = Math.pow(map.length, conversionLength - 1);
       quotient = Math.floor(remainder / placeValue);
       conversion += map[quotient];

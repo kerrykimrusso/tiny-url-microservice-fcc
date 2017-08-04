@@ -35,7 +35,10 @@ describe('TinyUrl Controller', function() {
     
     it('should return a slug of length 7', function() {
       expect(tinyUrlController._convertIntToBase(0, 7, map).length).to.equal(7);
-      expect(tinyUrlController._convertIntToBase(Math.pow(map.length, 7), 7, map).length).to.equal(7);
+      let int = Math.pow(map.length, 7);
+      let result = tinyUrlController._convertIntToBase(int, 7, map);
+      console.log({int, result});
+      expect(result.length).to.equal(7);
     });
     
     it('should throw an error if int is less than 0', function() {
