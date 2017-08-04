@@ -4,39 +4,41 @@ const urlValidator = require('valid-url');
 const baseConversionMap = require('../../constants').baseConversionMap;
 
 class TinyUrlController {
-  static create(req, res, next) {
-    let tinyUrl = TinyUrlController.shortenUrl(req.params.url);
-    if(tinyUrl) {
+  create(req, res, next) {
+    try {
+      let tinyUrl = this._shortenUrl(req.params.url);
       model.create(tinyUrl)
         .then()
         .catch(next);
+    } catch(err) {
+      res.json({ success: false, error: err.message }).end();
     }
   }
 
-  static getBySlug(req, res, next) {
+  getBySlug(req, res, next) {
     let slug = req.params.slug;
     model.findOne({ slug: slug })
       .then()
       .catch(next);
   }
   
-  static shortenUrl(url) {
-    if(!url) return null;
-    if(!TinyUrlController.isValidUrl(url)) return null;
+  _shortenUrl(url) {
+    if(!url) throw new Error('url cannot be empty or null');
+    if(!this._isValidUrl(url)) throw new Error('url not properly formatted');
     
-    let slug = TinyUrlController.convertIntToBase();
+    let slug = this._convertIntToBase();
     
     return { slug: slug, destination: url };
   }
   
-  static isValidUrl(url) {
+  _isValidUrl(url) {
     // TODO best would be to actually see if a 200 response is returned from the url
     // but easiest is just going to verify that the url is properly formatted
     
     return urlValidator.isUri(url);
   }
   
-  static convertIntToBase(int, conversionLength, map) {
+  _convertIntToBase(int, conversionLength, map) {
     if(int < 0) throw new Error('number to convert cannot be negative');
     
     if(int === 0) return '0'.repeat(conversionLength); //Array(conversionLength + 1).join('0');
