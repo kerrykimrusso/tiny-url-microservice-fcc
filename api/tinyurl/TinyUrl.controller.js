@@ -27,7 +27,7 @@ class TinyUrlController {
     if(!this._isValidUrl(url)) throw new Error('url not properly formatted');
     if(isNaN(parseInt(id))) throw new Error('id must be able to be parsed to an int');
     
-    return { slug: this._convertIntToBase(id), destination: url };
+    return { slug: this._convertIntToBase(id, 7, baseConversionMap), destination: url };
   }
   
   _isValidUrl(url) {
@@ -40,7 +40,7 @@ class TinyUrlController {
   _convertIntToBase(int, conversionLength, map) {
     if(int < 0) throw new Error('number to convert cannot be negative');
     
-    if(int === 0) return '0'.repeat(conversionLength); //Array(conversionLength + 1).join('0');
+    if(int === 0) return Array(conversionLength + 1).join('0');
     
     let conversion = '', placeValue = 0, quotient = 0, remainder = int;
     while(remainder > 0) {

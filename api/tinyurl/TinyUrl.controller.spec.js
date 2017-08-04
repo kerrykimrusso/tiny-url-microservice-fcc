@@ -33,8 +33,13 @@ describe('TinyUrl Controller', function() {
       expect(result).to.equal('0000000');
     });
     
+    it('should return a slug of length 7', function() {
+      expect(tinyUrlController._convertIntToBase(0, 7, map).length).to.equal(7);
+      expect(tinyUrlController._convertIntToBase(Math.pow(map.length, 7), 7, map).length).to.equal(7);
+    });
+    
     it('should throw an error if int is less than 0', function() {
-      expect(tinyUrlController._convertIntToBase.bind(-1, 7, map)).to.throw(Error);
+      expect(tinyUrlController._convertIntToBase.bind(null, -1, 7, map)).to.throw(Error);
     });
     
     it('should throw an error if int is larger than the largest possible integer for conversionLength', function() {
@@ -60,7 +65,7 @@ describe('TinyUrl Controller', function() {
     
     it('should throw an error if the id cannot be parsed to an integer', function() {
       expect(tinyUrlController._shortenUrl.bind(null, 'http://google.com', 'integer')).to.throw(Error);
-      expect(tinyUrlController._shortenUrl.bind(null, 'http://google.com', '9484')).to.not.throw();
+      expect(tinyUrlController._shortenUrl.bind(tinyUrlController, 'http://google.com', '9484')).to.not.throw();
     });
   });
 });
