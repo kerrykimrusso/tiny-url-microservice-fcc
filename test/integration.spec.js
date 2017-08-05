@@ -6,6 +6,7 @@ const before = mocha.before;
 const describe = mocha.describe;
 const beforeEach = mocha.beforeEach;
 const it = mocha.it;
+const after = mocha.after;
 const chai = require('chai');
 const expect = chai.expect;
 const chaihttp = require('chai-http');
@@ -19,7 +20,6 @@ before(function(done) {
     })
     .on('error', function(err) {
       console.log(err);
-      done();
     });
 });
 
@@ -28,6 +28,10 @@ describe('/new/http://google.com', function() {
     mongoose.connection.db.dropCollection('tinyurl', function() {
       console.log('tinyurl collection dropped');
     });
+  });
+  
+  mocha.afterEach(function(done) {
+    
   });
   
   it('should create a document from a valid long url', function(done) {
@@ -39,4 +43,8 @@ describe('/new/http://google.com', function() {
         done();
       })
   });
+});
+
+after(function(done) {
+  
 });
