@@ -10,14 +10,12 @@ const afterEach = mocha.afterEach;
 const after = mocha.after;
 const chai = require('chai');
 const expect = chai.expect;
-const chaihttp = require('chai-http');
-chai.use(chaihttp);
+chai.use(require('chai-http'));
 
 before(function(done) {
   mongoose.connect(process.env.MONGODBURITEST)
     .then(done, err => {
       console.log(err);
-      done();
     });
 });
 
