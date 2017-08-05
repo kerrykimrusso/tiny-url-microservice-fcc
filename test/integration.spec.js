@@ -1,6 +1,6 @@
 const server = require('../server');
 const mongoose = require('mongoose');
-mongoose.promise = global.Promise; 
+mongoose.Promise = global.Promise; 
 const mocha = require('mocha');
 const before = mocha.before;
 const describe = mocha.describe;
