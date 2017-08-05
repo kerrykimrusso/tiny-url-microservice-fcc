@@ -44,7 +44,7 @@ class TinyUrlController {
     // TODO best would be to actually see if a 200 response is returned from the url
     // but easiest is just going to verify that the url is properly formatted
     
-    return urlValidator.isUri(url);
+    return urlValidator.isWebUri(url);
   }
   
   _convertIntToBase(int, conversionLength, map) {
