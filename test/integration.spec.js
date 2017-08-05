@@ -12,6 +12,7 @@ const chai = require('chai');
 const expect = chai.expect;
 chai.use(require('chai-http'));
 
+// FIX getting an error that the port 3000 is in use
 before(function(done) {
   mongoose.connect(process.env.MONGODBURITEST)
     .then(done, err => {
