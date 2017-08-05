@@ -13,7 +13,6 @@ const expect = chai.expect;
 chai.use(require('chai-http'));
 
 before(function(done) {
-  console.log(process.env.MONGODBURITEST);
   mongoose.connect(process.env.MONGODBURITEST)
     .then(done, err => {
       console.log(err);
