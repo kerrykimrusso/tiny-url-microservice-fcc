@@ -27,7 +27,7 @@ class TinyUrlController {
   }
   
   _getLatestSlug(error, success) {
-    model.find({}).sort('-created').limit(1).exec()
+    model.find({}).sort('-createdAt').limit(1).exec()
       .then(success)
       .catch(error);
   }

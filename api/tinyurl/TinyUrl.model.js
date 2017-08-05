@@ -11,5 +11,9 @@ module.exports = mongoose.model('tinyurl', new mongoose.Schema({
     type: String,
     required: true,
     trim: true
+  },
+  createdAt: {
+    type: Date,
+    default: new Date().getTime()
   }
 }));
