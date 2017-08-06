@@ -6,8 +6,9 @@ const baseConversionMap = require('../../constants').baseConversionMap;
 class TinyUrlController {
   constructor() {
     this.curId = this._setId();
+    console.log(this.curId);
   }
-  
+   
   create(req, res, next) {
     try {
       let tinyUrl = this._shortenUrl(req.params.url, this.curId);
@@ -26,13 +27,12 @@ class TinyUrlController {
       .catch(next);
   }
   
-  _setId(error) {
+  _setId() {
     model.find({}).sort('-createdAt').limit(1).exec()
       .then((doc) => {
-      console.log(doc); 
-        this.curId = doc ? this._convertSlugToInt(doc.slug, baseConversionMap) : 0;
+        this.curId = doc && doc.length ? this._convertSlugToInt(doc[0].slug, baseConversionMap) : 0;
       })
-      .catch(error);
+      .catch((err) => { console.log(err) });  
   }
   
   _shortenUrl(url, id) {
@@ -75,7 +75,7 @@ class TinyUrlController {
   }
   
   _convertSlugToInt(slug, map) {
-    if(!slug) throw new Error('slug cannot be null, undefined, or empty');
+    if(slug) throw new Error('slug cannot be null, undefined, or empty');
     if(!map || !map.length) throw new Error('map cannot be null, undefined, or empty');
     
     let char = slug[0];
