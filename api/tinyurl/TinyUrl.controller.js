@@ -71,6 +71,24 @@ class TinyUrlController {
     return conversion;
   }
   
+  _convertSlugToInt(slug, map) {
+    if(!slug) throw new Error('slug cannot be null, undefined, or empty');
+    if(!map || !map.length) throw new Error('map cannot be null, undefined, or empty');
+    
+    let char = slug[0];
+    let int = 0;
+    let power = slug.length - 1;
+    let slugIndex = 0;
+    while(power >= 0) {
+      int += Math.pow(map.length, power);
+      --power;
+      slugIndex = slug.length - 1 - power;
+      char = slug[slugIndex];
+    }
+    
+    return int;
+  }
+  
   _respondWithDocumentAsJson(res, doc) {
     ++this.curId;
     res.json(doc).end();
