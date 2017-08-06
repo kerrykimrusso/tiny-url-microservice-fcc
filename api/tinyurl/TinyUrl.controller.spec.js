@@ -37,7 +37,6 @@ describe('TinyUrl Controller', function() {
       expect(tinyUrlController._convertIntToBase(0, 7, map).length).to.equal(7);
       let int = Math.pow(map.length, 6);
       let result = tinyUrlController._convertIntToBase(int, 7, map);
-      console.log({int, result});
       expect(result.length).to.equal(7);
     });
     
@@ -94,11 +93,6 @@ describe('TinyUrl Controller', function() {
     
     it('should throw an error if slug contains character not present in map', function() {
       expect(tinyUrlController._convertSlugToInt.bind(null, '023%432', map)).to.throw(Error);
-    });
-    
-    it('should throw an error if int is larger than the largest possible integer for conversionLength', function() {
-      let tooLargeOfANumber = Math.pow(map.length, 7);
-      expect(tinyUrlController._convertIntToBase.bind(null, tooLargeOfANumber, 7, map)).to.throw(Error);
     });
   });
 });

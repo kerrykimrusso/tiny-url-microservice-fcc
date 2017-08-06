@@ -4,8 +4,8 @@ const urlValidator = require('valid-url');
 const baseConversionMap = require('../../constants').baseConversionMap;
 
 class TinyUrlController {
-  constructor(curId = 0) {
-    this.curId = curId;
+  constructor() {
+    this.curId = this._setId();
   }
   
   create(req, res, next) {
@@ -26,9 +26,12 @@ class TinyUrlController {
       .catch(next);
   }
   
-  _getLatestSlug(error, success) {
+  _setId(error) {
     model.find({}).sort('-createdAt').limit(1).exec()
-      .then(success)
+      .then((doc) => {
+      console.log(doc); 
+        this.curId = doc ? this._convertSlugToInt(doc.slug, baseConversionMap) : 0;
+      })
       .catch(error);
   }
   
@@ -82,7 +85,7 @@ class TinyUrlController {
     let charIndex = 0;
     while(power >= 0) {
       charIndex = map.indexOf(char);
-      if(charIndex < 0) throw new Error('character in slug does not exist in map');
+      if(charIndex < 0) throw new Error(`character (${char}) in slug does not exist in map`);
       int += charIndex * Math.pow(map.length, power);
       --power;
       ++slugIndex;
