@@ -5,8 +5,7 @@ const baseConversionMap = require('../../constants').baseConversionMap;
 
 class TinyUrlController {
   constructor() {
-    this.curId = this._setId();
-    console.log(this.curId);
+     this._setId();
   }
    
   create(req, res, next) {
@@ -22,17 +21,19 @@ class TinyUrlController {
 
   getBySlug(req, res, next) {
     let slug = req.params.slug;
-    model.findOne({ slug: slug })
+    if(slug === null || slug === undefined || slug === '') return;
+    
+    model.findOne({ slug: slug }) 
       .then(this._redirect.bind(this, res))
       .catch(next);
   }
   
-  _setId() {
+  _setId(onError) {
     model.find({}).sort('-createdAt').limit(1).exec()
       .then((doc) => {
-        this.curId = doc && doc.length ? this._convertSlugToInt(doc[0].slug, baseConversionMap) : 0;
+        this.curId = doc && doc.length ? this._convertSlugToInt(doc[0].slug, baseConversionMap) + 1 : 0;
       })
-      .catch((err) => { console.log(err) });  
+      .catch(onError);   
   }
   
   _shortenUrl(url, id) {
@@ -71,11 +72,11 @@ class TinyUrlController {
       conversionLength -= 1;
     }
     
-    return conversion;
+    return conversion; 
   }
   
   _convertSlugToInt(slug, map) {
-    if(slug) throw new Error('slug cannot be null, undefined, or empty');
+    if(slug === null || slug === undefined || slug === '') throw new Error('slug cannot be null, undefined, or empty');
     if(!map || !map.length) throw new Error('map cannot be null, undefined, or empty');
     
     let char = slug[0];
@@ -101,6 +102,7 @@ class TinyUrlController {
   }
   
   _redirect(res, doc) {
+    console.log(doc)
     if(!doc) res.json({ success: false, error: 'That slug doesn\'t look familiar...'}).end();
     
     res.redirect(doc.destination);

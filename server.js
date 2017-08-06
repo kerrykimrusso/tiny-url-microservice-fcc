@@ -23,7 +23,7 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
-app.use('/', TinyUrlRoutes);
+app.use('/', TinyUrlRoutes); 
 
 
 // listen for requests :)
