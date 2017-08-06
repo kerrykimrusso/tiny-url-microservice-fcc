@@ -7,7 +7,7 @@
   "description": "What am I about?",
   "main": "server.js",
   "scripts": {
-    "test": "mocha --recursive ./**/*.spec.js",
+    "test": "mocha --recursive \"./**/*.spec.js\"",
     "start": "node server.js"
   },
   "dependencies": {

@@ -71,4 +71,30 @@ describe('TinyUrl Controller', function() {
       expect(tinyUrlController._shortenUrl.bind(tinyUrlController, 'http://google.com', '9484')).to.not.throw();
     });
   });
+  
+  describe('#convertSlugToInt(slug, map)', function() {
+    it('should return an int', function() {
+      let result = tinyUrlController._convertIntToBase(1, 7, map);
+      expect(result).to.be.a('string');
+    });
+    
+    it('should correctly convert a slug into its numerical counterpart', function() {
+      let result = tinyUrlController._convertSlugToInt('0000001', map);
+      expect(result).to.equal(1);
+      
+      result = tinyUrlController._convertSlugToInt('0000021', map);
+      expect(result).to.equal(125);
+      
+      result = tinyUrlController._convertSlugToInt('000023C', map);
+      expect(result).to.equal(7912);
+      
+      result = tinyUrlController._convertSlugToInt('0000000', map);
+      expect(result).to.equal(0);
+    });
+    
+    it('should throw an error if int is larger than the largest possible integer for conversionLength', function() {
+      let tooLargeOfANumber = Math.pow(map.length, 7);
+      expect(tinyUrlController._convertIntToBase.bind(null, tooLargeOfANumber, 7, map)).to.throw(Error);
+    });
+  });
 });

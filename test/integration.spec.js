@@ -1,24 +1,24 @@
-const server = require('../server');
-const mongoose = require('mongoose');
-mongoose.Promise = global.Promise; 
-const mocha = require('mocha');
-const before = mocha.before;
-const describe = mocha.describe;
-const beforeEach = mocha.beforeEach;
-const it = mocha.it;
-const afterEach = mocha.afterEach;
-const after = mocha.after;
-const chai = require('chai');
-const expect = chai.expect;
-chai.use(require('chai-http'));
+// const server = require('../server');
+// const mongoose = require('mongoose');
+// mongoose.Promise = global.Promise; 
+// const mocha = require('mocha');
+// const before = mocha.before;
+// const describe = mocha.describe;
+// const beforeEach = mocha.beforeEach;
+// const it = mocha.it;
+// const afterEach = mocha.afterEach;
+// const after = mocha.after;
+// const chai = require('chai');
+// const expect = chai.expect;
+// chai.use(require('chai-http'));
 
 // FIX getting an error that the port 3000 is in use
-before(function(done) {
-  mongoose.connect(process.env.MONGODBURITEST)
-    .then(done, err => {
-      console.log(err);
-    });
-});
+// before(function(done) {
+//   mongoose.connect(process.env.MONGODBURITEST)
+//     .then(done, err => {
+//       console.log(err);
+//     });
+// });
 
 // after(function(done) {
   
