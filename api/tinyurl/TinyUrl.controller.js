@@ -102,10 +102,8 @@ class TinyUrlController {
   }
   
   _redirect(res, doc) {
-    console.log(doc)
     if(!doc) res.json({ success: false, error: 'That slug doesn\'t look familiar...'}).end();
-    
-    res.redirect(doc.destination);
+    else res.redirect(doc.destination);
   }
 }
 
