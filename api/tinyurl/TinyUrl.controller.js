@@ -79,10 +79,13 @@ class TinyUrlController {
     let int = 0;
     let power = slug.length - 1;
     let slugIndex = 0;
+    let charIndex = 0;
     while(power >= 0) {
-      int += Math.pow(map.length, power);
+      charIndex = map.indexOf(char);
+      if(charIndex < 0) throw new Error('character in slug does not exist in map');
+      int += charIndex * Math.pow(map.length, power);
       --power;
-      slugIndex = slug.length - 1 - power;
+      ++slugIndex;
       char = slug[slugIndex];
     }
     

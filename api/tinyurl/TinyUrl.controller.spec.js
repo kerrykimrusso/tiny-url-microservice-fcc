@@ -92,6 +92,10 @@ describe('TinyUrl Controller', function() {
       expect(result).to.equal(0);
     });
     
+    it('should throw an error if slug contains character not present in map', function() {
+      expect(tinyUrlController._convertSlugToInt.bind(null, '023%432', map)).to.throw(Error);
+    });
+    
     it('should throw an error if int is larger than the largest possible integer for conversionLength', function() {
       let tooLargeOfANumber = Math.pow(map.length, 7);
       expect(tinyUrlController._convertIntToBase.bind(null, tooLargeOfANumber, 7, map)).to.throw(Error);
